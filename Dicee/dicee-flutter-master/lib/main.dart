@@ -28,20 +28,18 @@ class _DicePageState extends State<DicePage> {
   @override
   Widget build(BuildContext context) {
 
-    leftDiceNumber = 1;
-
     return Center(
       child: Row(
         children: [
           Expanded(
               child: TextButton(
+                child: Image.asset('images/dice$leftDiceNumber.png'),
                 onPressed: () {
                   setState(() {
                     leftDiceNumber = 4;
                     print('left button pressed.  dice = $leftDiceNumber');
                   });
                 },
-                child: Image.asset('images/dice$leftDiceNumber.png'),
               )
           ),
           Expanded(
