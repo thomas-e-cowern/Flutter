@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 import 'package:shake/shake.dart';
 
 void main() => runApp(MyApp());
@@ -26,6 +27,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  late ShakeDetector detector;
+
   static const List<String> quotes = [
     'You only live once, but if you do it right, once is enough.',
     'If you want to live a happy life, tie it to a goal, not to people or things.',
@@ -33,21 +37,26 @@ class _MainPageState extends State<MainPage> {
   ];
 
   String quote = quotes.first;
-  late ShakeDetector detector;
 
   @override
   void initState() {
     super.initState();
 
+    accelerometerEvents.listen((AccelerometerEvent event) {
+      print(event);
+    });
+
     detector = ShakeDetector.autoStart(
       onPhoneShake: () {
+
         final newQuote = (List.of(quotes)
           ..remove(quote)
           ..shuffle())
             .first;
 
         setState(() {
-          this.quote = newQuote;
+          print('phone has been shaken');
+          quote = newQuote;
         });
       },
     );

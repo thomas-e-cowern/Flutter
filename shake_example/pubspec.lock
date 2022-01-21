@@ -122,7 +122,7 @@ packages:
     source: hosted
     version: "2.1.2"
   sensors_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sensors_plus
       url: "https://pub.dartlang.org"
