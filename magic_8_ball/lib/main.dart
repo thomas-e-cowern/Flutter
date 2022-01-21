@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:shake/shake.dart';
 
 void main() {
   runApp(
@@ -37,6 +38,24 @@ class Ball extends StatefulWidget {
 class _BallState extends State<Ball> {
 
   int ballNumber = 1;
+  late ShakeDetector detector;
+
+  @override
+  void initState() {
+    super.initState();
+    detector = ShakeDetector.autoStart(onPhoneShake: () {
+
+      //   ballNumber = (Random().nextInt(5)) + 1;
+      //
+      // print('Phone shook, ballNumber is $ballNumber');
+
+      setState(() {
+        print('shake is working...');
+      });
+    });
+    // To close: detector.stopListening();
+    // ShakeDetector.waitForStart() waits for user to call detector.startListening();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +65,7 @@ class _BallState extends State<Ball> {
           setState(() {
             ballNumber = (Random().nextInt(5)) + 1;
           });
-          print('ballNumber is $ballNumber');
+          print('new ballNumber is $ballNumber');
         },
         child: Image.asset('images/ball$ballNumber.png'),
       ),
